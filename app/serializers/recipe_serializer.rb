@@ -1,3 +1,8 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :id, :id, :name, :serves, :category, :ingredients, :directions
+  attributes :id, :name, :serves, :category, :ingredients, :directions, \
+             :user_id, :editable
+
+  def editable
+    scope == object.user
+  end
 end

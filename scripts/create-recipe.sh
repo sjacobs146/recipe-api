@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TOKEN=BAhJIiU1YzI2MmEyM2UxMjE0NmRjZThmZjJlMWJjYzYzMjMyZgY6BkVG--02a11f2b646b0a2794ea4d5ff4a248e086ab3597 NAME="Chocolate Cake" sh scripts/create-recipe.sh
+# TOKEN=BAhJIiU2MTc3YjU4MDNkZmJjZTU4MTIxMzYyNmI0NjFjOWFjYgY6BkVG--0b302be94242ef193a23b0e13f029c097d04d0d2 NAME="Pumpkin Pie" sh scripts/create-recipe.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
 # API="${API_ORIGIN:-https://sjacobs146-recipe-api.herokuapp.com}"
@@ -15,8 +15,8 @@ curl "${API}${URL_PATH}" \
       "name": "'"${NAME}"'",
       "serves": 4,
       "category": "dessert",
-      "ingredients": "flour, sugar, eggs, baking soda",
-      "directions": "mix and bake"
+      "ingredients": "flour, sugar, Crisco, pumpkin, eggs, milk, spices",
+      "directions": "Make crust, add pumpkin mixture.  Bake."
     }
   }'
 
