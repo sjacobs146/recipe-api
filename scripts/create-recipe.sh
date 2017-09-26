@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TOKEN=BAhJIiU2MTc3YjU4MDNkZmJjZTU4MTIxMzYyNmI0NjFjOWFjYgY6BkVG--0b302be94242ef193a23b0e13f029c097d04d0d2 NAME="Pumpkin Pie" sh scripts/create-recipe.sh
+# TOKEN=BAhJIiUwNDI1NGY1ODBhMzI1NzFhMTQwNjMzYjkyOTU4YjFlZAY6BkVG--5c14eec9d49c03ccebbf9bf0a248cf33f3db05b7 NAME="Pumpkin Pie" sh scripts/create-recipe.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
 # API="${API_ORIGIN:-https://sjacobs146-recipe-api.herokuapp.com}"

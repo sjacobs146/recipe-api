@@ -37,14 +37,17 @@ class RecipesController < ProtectedController
 
   # DELETE /recipes/1
   def destroy
+    puts @recipe.name
     @recipe.destroy
+
+    head :no_content
   end
 
   private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
-      @recipe = current_user.examples.find(params[:id])
+      @recipe = current_user.recipes.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
