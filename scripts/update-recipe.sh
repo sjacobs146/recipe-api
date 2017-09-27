@@ -11,10 +11,11 @@ curl "${API}${URL_PATH}/$ID" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
     "recipe": {
-      "serves": 4,
+      "name": "'"${NAME}"'",
+      "serves": "'"${SERVES}"'",
       "category": "'"${CATEGORY}"'",
-      "ingredients": "flour, sugar, eggs, baking soda",
-      "directions": "mix and bake"
+      "ingredients": "'"${INGREDIENTS}"'",
+      "directions": "'"${DIRECTIONS}"'"
     }
   }'
 

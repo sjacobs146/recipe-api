@@ -1,110 +1,235 @@
 # Recipe Tracker
 
-This application stores recipes for users.  Users can create, update, and
-delete recipes.
+This application is a Ruby on Rails API for storing recipes for users.  Users
+can create, update, and delete recipes.
 
-[Click Here for demo](#)
+[Click Here for demo](https://sjacobs146.github.io/recipe-tracker/)
+
+API URL:  https://sjacobs146-recipe-api.herokuapp.com
 
 # Technologies Used
 - Ruby
 - Rails
-- HTML5
-- CSS
-- JavaScript
-- jQuery
-- Bootstrap
-- AJAX
-- REST
+- PostgreSQL
 
 # My Planning process
-I began my planning by reading the project requirements, and creating wireframes.
-Then I created some user stories, and an [agile board](https://trello.com/b/UrqPOOGs/full-stack-project) to represent the tasks that
-needed to be accomplished.  I also spent some time designing my application. I
-defined the entities needed (TODO: insert reference to erd).
 
-# My development process and problem-solving strategy
-## My development process
+# Entity Relationship Diagram
 
+![Recipe Tracker ERD](/recipe-tracker-erd.png)
 
-## My problem-solving strategy
-
-# Unsolved Problems
-
-
-# Code I'm most proud of
-
-
-# Wireframes and User Stories
-## Wireframes
-<!-- ![Wireframe 1](/docs/images/Wireframe_1.jpg)
-
-![Wireframe 2](/docs/images/Wireframe_2.jpg) -->
-
-
-## User Stories
-
+Note: not all of the entities were implemented
 
 ## A Message for my colleagues
 
-
-## Installation
-
-1.  [Download](../../archive/master.zip) this template.
-1.  Unzip and rename the template directory.
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Move into the new project and `git init`.
-1.  Install dependencies with `bundle install`.
-1.  Rename your app module in `config/application.rb` (change
-    `RailsApiTemplate`).
-1.  Rename your project database in `config/database.yml` (change
-    `'rails-api-template'`).
-1.  Create a `.env` for sensitive settings (`touch .env`).
-1.  Generate new `development` and `test` secrets (`bundle exec rake secret`).
-1.  Store them in `.env` with keys `SECRET_KEY_BASE_<DEVELOPMENT|TEST>`
-    respectively.
-1.  In order to make requests to your deployed API, you will need to set
-    `SECRET_KEY_BASE` in the environment of the production API (using `heroku
-    config:set` or the Heroku dashboard).
-1.  In order to make requests from your deployed client application, you will
-    need to set `CLIENT_ORIGIN` in the environment of the production API (e.g.
-    `heroku config:set CLIENT_ORIGIN https://<github-username>.github.io`).
-1.  Setup your database with `bin/rake db:nuke_pave` or `bundle exec rake
-    db:nuke_pave`.
-1.  Run the API server with `bin/rails server` or `bundle exec rails server`.
-
-## Structure
-
-This template follows the standard project structure in Rails 4.
-
-`curl` command scripts are stored in [`scripts`](scripts) with names that
-correspond to API actions.
-
-User authentication is built-in.
-
-## Tasks
-
-Developers should run these often!
-
--   `bin/rake routes` lists the endpoints available in your API.
--   `bin/rake test` runs automated tests.
--   `bin/rails console` opens a REPL that pre-loads the API.
--   `bin/rails db` opens your database client and loads the correct database.
--   `bin/rails server` starts the API.
--   `scripts/*.sh` run various `curl` commands to test the API. See below.
-
-<!-- TODO -   `rake nag` checks your code style. -->
-<!-- TODO -   `rake lint` checks your code for syntax errors. -->
+![Obligatory Cat Photo](/RubyCat.jpg)
 
 ## API
 
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
+### Recipes
+| Verb   | URI Pattern            | Controller#Action |
+|--------|------------------------|-------------------|
+| GET    | `/recipes`             | `recipes#index`   |
+| GET    | `/recipes/:id`         | `recipes#show`    |
+| POST   | `/recipes`             | `recipes#create`  |
+| PATCH  | `/recipes/:id`         | `recipes#update`  |
+| DELETE | `/recipes/:id`         | `recipes#delete`  |
 
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
+#### GET /recipes
+```sh
+API="${API_ORIGIN:-http://localhost:4741}"
+URL_PATH="/recipes"
+curl "${API}${URL_PATH}" \
+  --include \
+  --request GET \
+  --header "Authorization: Token token=$TOKEN"
+```
+```sh
+TOKEN=BAhJIiU2YjQ0MDNmYTAwYjJhZWVjMTgyMmZjYTdlNTdlMGI2ZQY6BkVG--29964af2634899b453ab75d3f3e6fa080375c7c1 sh scripts/get-recipes.sh
+```
 
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{
+  "recipes": [
+    {
+      "id": 8,
+      "name": "Pumpkin Pie",
+      "serves": 4,
+      "category": "dessert",
+      "ingredients": "flour, sugar, Crisco, pumpkin, eggs, milk, spices",
+      "directions": "Make crust, add pumpkin mixture.  Bake.",
+      "user_id": 1,
+      "editable": true
+    },
+    {
+      "id": 9,
+      "name": "Apple Cake",
+      "serves": 12,
+      "category": "Desserts",
+      "ingredients": null,
+      "directions": "Make batter, place sliced apples on batter, sprinkle topping over all, bake at 350 for 45 minutes.",
+      "user_id": 1,
+      "editable": true
+    },
+    {
+      "id": 7,
+      "name": "Dutch Apple Pie",
+      "serves": 8,
+      "category": "Desserts",
+      "ingredients": "flour, sugar, Crisco, apples, cinnamon, sugar",
+      "directions": "Make bottom crust, place apple mixture in, top with crumb mixture, bake 375 for 45 minutes",
+      "user_id": 1,
+      "editable": true
+    },
+    {
+      "id": 19,
+      "name": "Pot Roast",
+      "serves": 6,
+      "category": "Desserts",
+      "ingredients": null,
+      "directions": "Brown roast on all sides in Dutch oven, add beef broth, bring to a boil.  Put lid on Dutch oven, place in oven at 325 degrees for 3 hours.  ",
+      "user_id": 1,
+      "editable": true
+    }
+  ]
+}
+```
+
+#### GET /recipes/1
+```sh
+API="${API_ORIGIN:-http://localhost:4741}"
+URL_PATH="/recipes"
+curl "${API}${URL_PATH}/$ID" \
+  --include \
+  --request GET \
+  --header "Authorization: Token token=$TOKEN"
+```
+```sh
+TOKEN=BAhJIiU2YjQ0MDNmYTAwYjJhZWVjMTgyMmZjYTdlNTdlMGI2ZQY6BkVG--29964af2634899b453ab75d3f3e6fa080375c7c1 ID=1 sh scripts/get-recipe.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{
+  "recipe": {
+    "id": 8,
+    "name": "Pumpkin Pie",
+    "serves": 4,
+    "category": "dessert",
+    "ingredients": "flour, sugar, Crisco, pumpkin, eggs, milk, spices",
+    "directions": "Make crust, add pumpkin mixture.  Bake.",
+    "user_id": 1,
+    "editable": true
+  }
+}
+```
+#### POST /recipes/
+```sh
+API="${API_ORIGIN:-http://localhost:4741}"
+URL_PATH="/recipes"
+curl "${API}${URL_PATH}" \
+  --include \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Token token=$TOKEN" \
+  --data '{
+    "recipe": {
+      "name": "'"${NAME}"'",
+      "serves": "'"${SERVES}"'",
+      "category": "'"${CATEGORY}"'",
+      "ingredients": "'"${INGREDIENTS}"'",
+      "directions": "'"${DIRECTIONS}"'"
+  }'
+```
+```sh
+TOKEN=BAhJIiU2YjQ0MDNmYTAwYjJhZWVjMTgyMmZjYTdlNTdlMGI2ZQY6BkVG--29964af2634899b453ab75d3f3e6fa080375c7c1 NAME="Test Recipe" SERVES=6 CATEGORY=Dessert INGREDIENTS="Test Ingredients" DIRECTIONS="Test Directions" sh scripts/create-recipe.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 201 Created
+Location: http://localhost:4741/recipes/21
+Content-Type: application/json; charset=utf-8
+{
+  "recipe": {
+    "id": 21,
+    "name": "Test Recipe",
+    "serves": 4,
+    "category": "dessert",
+    "ingredients": "flour, sugar, Crisco, pumpkin, eggs, milk, spices",
+    "directions": "Make crust, add pumpkin mixture.  Bake.",
+    "user_id": 1,
+    "editable": true
+  }
+}
+```
+#### PATCH /recipes/1
+```sh
+API="${API_ORIGIN:-http://localhost:4741}"
+URL_PATH="/recipes"
+curl "${API}${URL_PATH}/$ID" \
+  --include \
+  --request PATCH \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Token token=$TOKEN" \
+  --data '{
+    "recipe": {
+      "name": "'"${NAME}"'",
+      "serves": "'"${SERVES}"'",
+      "category": "'"${CATEGORY}"'",
+      "ingredients": "'"${INGREDIENTS}"'",
+      "directions": "'"${DIRECTIONS}"'"
+    }
+  }'
+```
+```sh
+TOKEN=BAhJIiU2YjQ0MDNmYTAwYjJhZWVjMTgyMmZjYTdlNTdlMGI2ZQY6BkVG--29964af2634899b453ab75d3f3e6fa080375c7c1 ID=21 NAME="Update Recipe" SERVES=8 CATEGORY=Dessert INGREDIENTS="Update Ingredients" DIRECTIONS="Update Directions" sh scripts/update-recipe.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{
+  "recipe": {
+    "id": 21,
+    "name": "Update Recipe",
+    "serves": 8,
+    "category": "Dessert",
+    "ingredients": "Update Ingredients",
+    "directions": "Update Directions",
+    "user_id": 1,
+    "editable": true
+  }
+}
+```
+#### DELETE /recipes/1
+```sh
+API="${API_ORIGIN:-http://localhost:4741}"
+URL_PATH="/recipes"
+curl "${API}${URL_PATH}/$ID" \
+  --include \
+  --request DELETE \
+  --header "Authorization: Token token=$TOKEN"
+```
+```sh
+TOKEN=BAhJIiU2YjQ0MDNmYTAwYjJhZWVjMTgyMmZjYTdlNTdlMGI2ZQY6BkVG--29964af2634899b453ab75d3f3e6fa080375c7c1 ID=21 sh scripts/delete-recipe.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 204 No Content
+```
 ### Authentication
 
 | Verb   | URI Pattern            | Controller#Action |
@@ -301,27 +426,3 @@ Content-Type: application/json; charset=utf-8
   }
 }
 ```
-
-### Reset Database without dropping
-
-This is not a task developers should run often, but it is sometimes necessary.
-
-**locally**
-
-```sh
-bin/rake db:migrate VERSION=0
-bin/rake db:migrate db:seed db:examples
-```
-
-**heroku**
-
-```sh
-heroku run rake db:migrate VERSION=0
-heroku run rake db:migrate db:seed db:examples
-```
-
-## [License](LICENSE)
-
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
