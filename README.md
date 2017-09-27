@@ -13,12 +13,27 @@ API URL:  https://sjacobs146-recipe-api.herokuapp.com
 - PostgreSQL
 
 # My Planning process
+Please see the front-end component of this project for more information about
+my planning process, etc.: https://github.com/sjacobs146/recipe-tracker
 
 # Entity Relationship Diagram
 
 ![Recipe Tracker ERD](/recipe-tracker-erd.png)
 
 Note: not all of the entities were implemented
+
+# My development process and problem-solving strategy
+I began this full-stack project by implementing the back-end first.  I started
+with the simplest relationship: users have many recipes.  I created the recipes
+resource first. I used the Rails scaffold command to generate the database
+migration script, model and controller.  Once I was able to create records in
+the Recipes table, I added the relationship to users.  I updated the recipes
+controller to extend ProtectedController so that users could only see and update
+their own recipes.  I used shell scripts to run curl commands to test each of
+my endpoints.  Most of the problems I had were copy/paste errors.  I looked at
+the terminal session that was running my code locally to see the errors.  The
+api code is pretty simple, so I didn't run into anything complicated.  
+
 
 ## A Message for my colleagues
 
